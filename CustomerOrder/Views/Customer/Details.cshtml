@@ -1,0 +1,58 @@
+﻿@model Customer
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<a asp-action="GetAllCustomers"
+   asp-controller="Customer"
+   class="btn btn-outline-primary">All Customers  </a>
+<table class=" table-bordered table-striped table-light">
+    <tr>
+        <th>EmployeeId</th>
+        <th>EmployeeName</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>creation date</th>
+        <th> active</th>
+        <th> deleted</th>
+        <th>Customer Orders</th>
+    </tr>
+    <tbody>
+
+        <tr>
+            <td>@Model.CustomerId</td>
+            <td>@Model.CustomerName</td>
+            <td>@Model.Email</td>
+            <td>@Model.Phone</td>
+            <td>@Model.CreationDate</td>
+            <td>
+                @if (Model.IsActive){
+                    <span class="badge text-success">Active</span>
+                }
+                else
+                {
+                    <span class="badge text-danger">Non-Active</span>
+
+                }
+            </td>
+            <td>
+                @if (Model.IsDeleted){
+                <span class="badge text-danger">Is_Deleted</span>
+                }
+                else
+                {
+                <span class="badge text-success">Not-Deleted</span>
+
+                }
+            </td>
+            <td>
+                  <a asp-action="OrderDetails"
+                   asp-controller="Order"
+                   asp-route-id="@Model.CustomerId"
+                   class="btn btn-outline-primary " style="align-Center">Orders  </a>
+            </td>
+
+        </tr>
+    </tbody>
+</table>

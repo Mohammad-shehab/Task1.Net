@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Customer>
+@{
+    ViewData["Title"] = "All Customers";
+}
+
+<h1>All Customers</h1>
+
+
+<a asp-action="CreateOrder"
+   asp-controller="Order"
+   class="btn btn-outline-success">Create Order</a>
+
+<a asp-action="CreateCustomer"
+   asp-controller="Customer"
+   class="btn btn-outline-success">Create Customer</a>
+
+<a asp-action="ActiveCus"
+   asp-controller="Customer"
+   class="btn btn-outline-success">Active Customers</a>
+
+<a asp-action="NonActiveCus"
+   asp-controller="Customer"
+   class="btn btn-outline-success">Non-Active Customers</a>
+
+<table class=" table-bordered table-striped table-light table-responsive">
+    <tr>
+        <th>@Html.DisplayNameFor(m => m.CustomerId)</th> 
+        <th>@Html.DisplayNameFor(m => m.CustomerName)</th>
+        <th>@Html.DisplayNameFor(m => m.Email)</th>
+        <th>Operations</th>
+    </tr>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.CustomerId</td>
+                <td>
+                    <a asp-action="OrderDetails"
+                       asp-controller="Order"
+                       asp-route-id="@customer.CustomerId"
+                      >@customer.CustomerName </a>
+                </td>
+                <td>@customer.Email</td>
+        
+               <td>
+                    <a asp-action="Details"
+                       asp-controller="Customer"
+                       asp-route-id="@customer.CustomerId"
+                       class="btn btn-outline-primary">Details  </a>
+                    <a asp-action="OrderDetails"
+                       asp-controller="Order"
+                       asp-route-id="@customer.CustomerId"
+                       class="btn btn-outline-primary">Orders  </a>
+                </td>
+             
+            </tr>
+        }
+    </tbody>
+</table>
